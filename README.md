@@ -1,5 +1,5 @@
 
-# teodragovic.com
+# markokovacic.com
 
 Personal website.
 
@@ -28,27 +28,3 @@ Start `localhost` and watch for file changes:
 **Build for deployment**
 
     npm run build
-
-## Deployment
-
-### Install Ruby
-
-Install bundler and run to install dependencies
-
-```
-gem install bundler
-bundle install
-```
-
-Create deploy directory and setup gh-pages
-
-```
-mkdir deploy
-cd deploy
-git init
-git remote add origin git@github.com:teodragovic/teodragovic.github.io.git
-```
-
-**Deploy to github Pages**
-
-    rake deploy
