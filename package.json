@@ -6,7 +6,7 @@
   "scripts": {
     "start": "gulp watch",
     "build": "gulp --prod",
-    "commit:build": "git add . && git commit -am \"Build\" && git push origin master",
+    "commit:build": "git add . && git commit -m \"Build\" && git push origin master",
     "deploy": "npm run build && gh-pages -d build && npm run commit:build"
   },
   "devDependencies": {
