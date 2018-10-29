@@ -29,6 +29,10 @@ Start `localhost` and watch for file changes:
 
     npm run build
 
+**Deploy**
+
+    npm run deploy
+
 ## TODO:
 
 - [ ] add animations
