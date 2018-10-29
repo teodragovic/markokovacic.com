@@ -72,11 +72,18 @@ gulp.task( 'copy:root', () =>
     .pipe( gulp.dest( config.outputDir ) );
 } );
 
+// Copy all images source to output directory
+gulp.task( 'copy:images', () =>
+{
+    return gulp.src( [ `${config.baseDir}/images/**/*` ] )
+    .pipe( gulp.dest( `${config.outputDir}/images/` ) );
+} );
+
 // Production build
 gulp.task( 'default', [ 'clean' ], cb =>
 {
     return runSequence(
-    [ 'lint:css', 'lint:js', 'copy:root' ],
+    [ 'lint:css', 'lint:js', 'copy:root', 'copy:images' ],
     [ 'styles', 'scripts' ],
     'html',
     'clean:build',

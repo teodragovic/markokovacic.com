@@ -10,31 +10,31 @@
     <title>Marko Kovacic</title>
 
     <link href="/main.css" rel="stylesheet" data-inline>
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
 </head>
 
 <body>
-
-    <section>
-        <h1>Marko Kovacic</h1>
+    <section class="section header">
+        <h1>Marko Kovačić</h1>
     </section>
-
-    <div id="email" class="popup" role="dialog">
-
-        <a href="#" class="popup__overlay"></a>
-
-        <div class="popup__body" role="document">
-
-            <span class="hide">
-                {{ email | replace( '@', ' at ' ) }}
-            </span>
-            <a class="js-mail mail fancy-underline" tabindex="0" aria-hidden="true">
-                {{ email | reverse }}
+    <div class="cover"></div>
+    <section class="section contact" id="contact">
+        <div class="contact__header">
+            <a href="#" class="close"></a>
+            <a class="btn" href="#contact">
+                <h2>Kontakt</h2>
             </a>
         </div>
 
-    </div>
-
-    <script src="/main.js" data-inline></script>
+        <div class="contact__info">
+            <ul>
+                <li><a href="mailto:info@markokovacic.com">info@markokovacic.com</a></li>
+                <li><a href="tel:+385997017022">+385 99 701 7022</a></li>
+                <li><a href="https://facebook.com/kovaBB/">facebook.com/kovaBB</a></li>
+                <li><a href="https://www.instagram.com/samomisici/">instagram.com/samomisici</a></li>
+            </ul>
+        </div>
+    </section>
 
 </body>
 </html>
