@@ -18,40 +18,34 @@ const arg = yargs.argv;
 
 const prod = ( arg.prod ) ? true : false;
 
-function onError( err )
-{
+function onError( err ) {
     console.error( err );
     this.emit( 'end' );
 }
 
-gulp.task( 'nunjucks', () =>
-{
+gulp.task( 'nunjucks', () => {
     return gulp.src( `${config.baseDir}/${config.htmlDir}/*.html` )
     .pipe( $.nunjucks.compile() )
     .on( 'error', onError )
     .pipe( gulp.dest( config.outputDir ) );
-} );
+});
 
-gulp.task( 'html', [ 'nunjucks' ], () =>
-{
+gulp.task( 'html', [ 'nunjucks' ], () => {
     return gulp.src( `${config.outputDir}/**/*.html` )
-    .pipe( $.if( prod, inlinesource(
-    {
-        rootpath : `${config.outputDir}/`,
-        attribute : 'data-inline',
-    } ) ) )
-    .pipe( $.if( prod, $.htmlmin(
-    {
-        collapseWhitespace : true,
-        conservativeCollapse : true,
-        keepClosingSlash : true,
-        minifyJS : true
-    } ) ) )
-    .pipe( $.size(
-    {
-        title : pkg.name + ' HTML:',
-        showFiles : true,
-        gzip : true
-    } ) )
+    .pipe( $.if( prod, inlinesource({
+        rootpath: `${config.outputDir}/`,
+        attribute: 'data-inline',
+    }) ) )
+    .pipe( $.if( prod, $.htmlmin({
+        collapseWhitespace: true,
+        conservativeCollapse: true,
+        keepClosingSlash: true,
+        minifyJS: true
+    }) ) )
+    .pipe( $.size({
+        title: pkg.name + ' HTML:',
+        showFiles: true,
+        gzip: true
+    }) )
     .pipe( gulp.dest( config.outputDir ) );
-} );
+});

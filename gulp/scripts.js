@@ -28,50 +28,46 @@ const prod = ( arg.prod ) ? true : false;
 const env = prod ? 'production' : 'development';
 const scriptsPath = `${config.baseDir}/${config.scriptsDir}`;
 
-function onError( err )
-{
+function onError( err ) {
     console.error( err );
     this.emit( 'end' );
 }
 
 // Lint JavaScript
-gulp.task( 'lint:js', () =>
-{
+gulp.task( 'lint:js', () => {
     return gulp.src( [ `${scriptsPath}/**/*.js`, '!node_modules/**' ] )
     .pipe( $.eslint() )
     .pipe( $.eslint.format() )
     .pipe( $.if( !browserSync.active, $.eslint.failAfterError() ) );
-} );
+});
 
 // Compile bundle
-gulp.task( 'scripts', () =>
-{
+gulp.task( 'scripts', () => {
     return rollup(
     {
-        input : `${scriptsPath}/${config.scriptsFileName}.js`,
-        plugins : [
-            resolve( { browser : true } ),
+        input: `${scriptsPath}/${config.scriptsFileName}.js`,
+        plugins: [
+            resolve({ browser: true }),
             replace(
             {
-                'process.env.NODE_ENV' : JSON.stringify( env )
-            } ),
+                'process.env.NODE_ENV': JSON.stringify( env )
+            }),
             commonjs(),
-            babel( { exclude : 'node_modules/**' } ),
+            babel({ exclude: 'node_modules/**' }),
         ],
-        sourcemap : true,
-        format : 'iife'
-    } )
+        sourcemap: true,
+        format: 'iife'
+    })
     .on( 'error', onError )
     .pipe( source( `${config.scriptsFileName}.js` ) )
     .pipe( buffer() )
-    .pipe( $.sourcemaps.init( { loadMaps : true } ) )
-    .pipe( $.if( prod, $.uglify( { compress : { drop_console : true } } ) ) )
-    .pipe( $.size(
-    {
-        title : pkg.name + ' JS:',
-        showFiles : true,
-        gzip : true
-    } ) )
+    .pipe( $.sourcemaps.init({ loadMaps: true }) )
+    .pipe( $.if( prod, $.uglify({ compress: { drop_console: true } }) ) )
+    .pipe( $.size({
+        title: pkg.name + ' JS:',
+        showFiles: true,
+        gzip: true
+    }) )
     .pipe( $.sourcemaps.write( './' ) )
     .pipe( gulp.dest( `${config.outputDir}/${config.outputScripts}` ) );
-} );
+});

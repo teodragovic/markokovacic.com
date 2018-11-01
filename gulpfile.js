@@ -31,25 +31,22 @@ gulp.task( 'dummy', ( cb ) => { return cb(); } );
 // Serving section
 // The following task serve assets to the browser on `localhost:{port}`
 // and watches for changes in the source code.
-gulp.task( 'watch', [ 'styles', 'scripts', 'html' ], () =>
-{
-    browserSync.init(
-    {
-        open : true,
-        notify : false,
+gulp.task( 'watch', [ 'styles', 'scripts', 'html', 'copy:images', 'copy:root' ], () => {
+    browserSync.init({
+        open: true,
+        notify: false,
         // Customize the BrowserSync console logging prefix
-        logPrefix : pkg.name,
-        server :
-        {
-            baseDir : [ config.outputDir ],
+        logPrefix: pkg.name,
+        server: {
+            baseDir: [ config.outputDir ],
         },
-        port : 4000,
-    } );
+        port: 4000,
+    });
 
     gulp.watch( [ htmlGlob ], [ 'html', reload ] );
     gulp.watch( [ stylesGlob ], [ 'lint:css', 'styles' ] );
     gulp.watch( [ scriptsGlob ], [ 'lint:js', 'scripts', reload ] );
-} );
+});
 
 // Build section
 // The following tasks builds all assets for production, this includes:
@@ -60,32 +57,29 @@ gulp.task( 'watch', [ 'styles', 'scripts', 'html' ], () =>
 // - compile and minify JS bundle from ES6 modules (passing `--prod` flag will also uglify JS)
 
 // Clean output directory
-gulp.task( 'clean', () => del( [ `${config.outputDir}/*` ], { dot : true } ) );
+gulp.task( 'clean', () => del( [ `${config.outputDir}/*` ], { dot: true } ) );
 
 // Remove assets from output directory
 gulp.task( 'clean:build', () => del( [ `${config.outputDir}/**/*.{map,css,js}` ] ) );
 
 // Copy all files from root/ directory to output
-gulp.task( 'copy:root', () =>
-{
+gulp.task( 'copy:root', () => {
     return gulp.src( [ `${config.baseDir}/root/*` ] )
     .pipe( gulp.dest( config.outputDir ) );
-} );
+});
 
 // Copy all images source to output directory
-gulp.task( 'copy:images', () =>
-{
+gulp.task( 'copy:images', () => {
     return gulp.src( [ `${config.baseDir}/images/**/*` ] )
     .pipe( gulp.dest( `${config.outputDir}/images/` ) );
-} );
+});
 
 // Production build
-gulp.task( 'default', [ 'clean' ], cb =>
-{
+gulp.task( 'default', [ 'clean' ], cb => {
     return runSequence(
-    [ 'lint:css', 'lint:js', 'copy:root', 'copy:images' ],
-    [ 'styles', 'scripts' ],
+    [ 'lint:css', 'copy:root', 'copy:images' ],
+    [ 'styles' ],
     'html',
     'clean:build',
     cb );
-} );
+});

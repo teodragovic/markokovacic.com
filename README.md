@@ -36,10 +36,8 @@ Start `localhost` and watch for file changes:
 ## TODO:
 
 - [ ] add animations
-- [ ] add service worker (precache and offline first)
 - [ ] optimize image size
 - [ ] lazy load image
 - [ ] email spam protection
 - [ ] replace custom font with svg
-- [ ] add favicon
 - [ ] refactor css
