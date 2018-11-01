@@ -39,9 +39,7 @@ Start `localhost` and watch for file changes:
 - [ ] add service worker (precache and offline first)
 - [ ] optimize image size
 - [ ] lazy load image
-- [ ] change eslint style
 - [ ] email spam protection
 - [ ] replace custom font with svg
 - [ ] add favicon
-- [ ] semantic html
 - [ ] refactor css
