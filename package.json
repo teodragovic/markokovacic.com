@@ -7,7 +7,8 @@
     "start": "gulp watch",
     "build": "gulp --prod",
     "commit:build": "git add . && git commit -m \"Build\" && git push origin master",
-    "deploy": "npm run build && gh-pages -d build && npm run commit:build"
+    "deploy": "npm run build && npm run sw && gh-pages -d build && npm run commit:build",
+    "sw": "sw-precache --root=\"build/\" --static-file-globs=\"build/**/!(*map*)\""
   },
   "devDependencies": {
     "babel-core": "6.26.0",
@@ -43,6 +44,7 @@
     "stylelint": "8.2.0",
     "stylelint-config-standard": "17.0.0",
     "stylelint-scss": "2.1.0",
+    "sw-precache": "5.2.1",
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0"
   },

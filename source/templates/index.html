@@ -9,6 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Marko Kovacic</title>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#05040a">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="theme-color" content="#05040a">
+
     <link href="/main.css" rel="stylesheet" data-inline>
     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
 </head>
@@ -28,13 +37,17 @@
 
         <div class="contact__info">
             <ul>
-                <li><a href="mailto:info@markokovacic.com">info@markokovacic.com</a></li>
+                <li><a href="mailto:{{ email }}">{{ email }}</a></li>
                 <li><a href="tel:+385997017022">+385 99 701 7022</a></li>
                 <li><a href="https://facebook.com/kovaBB/">facebook.com/kovaBB</a></li>
                 <li><a href="https://www.instagram.com/samomisici/">instagram.com/samomisici</a></li>
             </ul>
         </div>
     </section>
-
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js');
+    }
+    </script>
 </body>
 </html>
